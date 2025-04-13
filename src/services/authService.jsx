@@ -4,52 +4,54 @@ import {
   signOut,
   onAuthStateChanged
 } from 'firebase/auth';
-import { auth } from '../firebase/firebase';
+import { auth, firestore } from '../firebase/firebase';
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
-// Function to check if user is logged in and persist state
+// ✅ Fix: Properly handle authentication state changes
 const checkAuthState = (setUser) => {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user);
-      localStorage.setItem('user', JSON.stringify(user)); // ✅ Store user in LocalStorage
-    } else {
-      setUser(null);
-      localStorage.removeItem('user'); // ✅ Remove user on logout
-    }
+  return onAuthStateChanged(auth, (user) => {
+    setUser(user);
   });
 };
 
-// Sign Up
+// ✅ Sign Up (Registers user and initializes Firestore entry)
 const signUp = async (email, password) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    console.log('User signed up:', userCredential.user);
-    localStorage.setItem('user', JSON.stringify(userCredential.user)); // ✅ Persist user
-    return userCredential.user;
+    const user = userCredential.user;
+    console.log('User signed up:', user);
+
+    // ✅ Initialize Firestore user document
+    const userDocRef = doc(firestore, "users", user.uid);
+    await setDoc(userDocRef, {
+      email: user.email,
+      workoutPlan: null, // No default workout plan
+      createdAt: new Date()
+    });
+
+    return user;
   } catch (error) {
     console.error('Error signing up:', error.message);
     throw error;
   }
 };
 
-// Login
+// ✅ Login (No unnecessary localStorage usage)
 const login = async (email, password) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log('User logged in:', userCredential.user);
-    localStorage.setItem('user', JSON.stringify(userCredential.user)); // ✅ Persist user
+    console.log("User logged in:", userCredential.user);
     return userCredential.user;
   } catch (error) {
-    console.error('Error logging in:', error.message);
+    console.error("Error logging in:", error.message);
     throw error;
   }
 };
 
-// Log Out
+// ✅ Log Out (Removes user from state)
 const logout = async () => {
   try {
     await signOut(auth);
-    localStorage.removeItem('user'); // ✅ Clear user on logout
     console.log('User logged out');
   } catch (error) {
     console.error('Error logging out:', error.message);
