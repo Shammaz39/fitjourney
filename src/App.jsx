@@ -5,6 +5,9 @@ import Dashboard from './pages/Dashboard';
 import WorkoutSelection from './pages/WorkoutSelection';
 import { checkAuthState } from './services/authService';
 import LogWorkout from "./pages/LogWorkout";
+import ProgressTracker from "./pages/ProgressTracker";
+import UserProfile from "./pages/UserProfile";
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,7 +32,9 @@ function App() {
         <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login" />} />
         <Route path="/select-workout" element={user ? <WorkoutSelection /> : <Navigate to="/login" />} />
         <Route path="*" element={<Navigate to={user ? "/dashboard" : "/login"} />} />
+        <Route path="/progress" element={user ? <ProgressTracker /> : <Navigate to="/login" />} />
         <Route path="/log-workout" element={<LogWorkout />} />
+        <Route path="/profile" element={user ? <UserProfile /> : <Navigate to="/login" />} />
       </Routes>
     </Router>
   );
