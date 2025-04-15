@@ -1,0 +1,127 @@
+/* Dashboard.css - Fitness Focused Styling */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.dashboard-header h2 {
+  color: #3182CE;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-user {
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+.section {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #EDF2F7;
+}
+
+.section h3 {
+  color: #2D3748;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #38B2AC; /* Teal accent */
+}
+
+.workout-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.workout-list li {
+  padding: 0.8rem;
+  margin-bottom: 0.5rem;
+  background-color: #F8FAFC;
+  border-left: 3px solid #3182CE;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.workout-list li:hover {
+  background-color: #EBF8FF;
+  transform: translateX(2px);
+}
+
+.workout-list li strong {
+  color: #2B6CB0;
+}
+
+.dashboard-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+button {
+  padding: 0.8rem;
+  background-color: #3182CE;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #2B6CB0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific button styles */
+button[onClick*="log-workout"] {
+  background-color: #38B2AC; /* Teal for workout logging */
+}
+
+button[onClick*="progress"] {
+  background-color: #F6AD55; /* Orange for progress */
+}
+
+button[onClick*="profile"] {
+  background-color: #718096; /* Gray for profile */
+}
+
+button[onClick*="logout"] {
+  background-color: #E53E3E; /* Red for logout */
+}
+
+/* Loading states */
+p[class*="loading"] {
+  color: #718096;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 1rem;
+  }
+}

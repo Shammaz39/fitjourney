@@ -21,6 +21,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
 
+const db = getFirestore(app);
+
 // Sign-up function
 export const signUp = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);
@@ -36,4 +38,4 @@ export const logout = () => {
   return signOut(auth);
 };
 
-export { auth, firestore };
+export { db,auth, firestore };

@@ -1,0 +1,285 @@
+/* LogWorkout.css - Workout Tracking Styles */
+
+/* ===== BASE STYLES ===== */
+.log-workout-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #2D3748;
+}
+
+.page-title {
+  color: #3182CE;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  position: relative;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #38B2AC;
+}
+
+/* ===== DATE PICKER ===== */
+.date-picker {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.date-picker label {
+  font-weight: 500;
+  color: #4A5568;
+}
+
+.date-picker input {
+  padding: 0.6rem;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* ===== WORKOUT FORM ===== */
+.workout-form {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.workout-name {
+  color: #2B6CB0;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* ===== EXERCISE SELECTION ===== */
+.exercise-selection {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #EDF2F7;
+}
+
+.selection-hint {
+  color: #718096;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.exercise-checkboxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.8rem;
+}
+
+.exercise-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.exercise-checkbox input {
+  width: 18px;
+  height: 18px;
+}
+
+.exercise-checkbox label {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ===== EXERCISE CARDS ===== */
+.exercise-card {
+  background: #F8FAFC;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-left: 4px solid #3182CE;
+}
+
+.exercise-name {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2D3748;
+}
+
+/* ===== SETS TABLE ===== */
+.sets-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.sets-table th {
+  background: #EDF2F7;
+  padding: 0.8rem;
+  text-align: left;
+  font-weight: 500;
+  color: #4A5568;
+}
+
+.sets-table td {
+  padding: 0.8rem;
+  border-bottom: 1px solid #EDF2F7;
+}
+
+.input-field {
+  width: 80px;
+  padding: 0.5rem;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #3182CE;
+  box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.1);
+}
+
+/* ===== BUTTONS ===== */
+.add-set-btn,
+.remove-set-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-set-btn {
+  background: #38B2AC;
+  color: white;
+}
+
+.add-set-btn:hover {
+  background: #2C8A87;
+  transform: translateY(-1px);
+}
+
+.remove-set-btn {
+  background: #E53E3E;
+  color: white;
+}
+
+.remove-set-btn:hover {
+  background: #C53030;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.save-btn,
+.cancel-btn,
+.select-plan-btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-btn {
+  background: #3182CE;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #2B6CB0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-btn {
+  background: #EDF2F7;
+  color: #4A5568;
+}
+
+.cancel-btn:hover {
+  background: #E2E8F0;
+}
+
+.select-plan-btn {
+  background: #3182CE;
+  color: white;
+  margin-top: 1rem;
+}
+
+/* ===== NOTES SECTION ===== */
+.notes-section {
+  margin-top: 2rem;
+}
+
+.notes-input {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.notes-input:focus {
+  outline: none;
+  border-color: #3182CE;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+/* ===== EMPTY STATES ===== */
+.no-exercises-today,
+.no-workout-selected {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== LOADING STATE ===== */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #718096;
+  font-style: italic;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+  .log-workout-container {
+    padding: 1rem;
+  }
+
+  .workout-form {
+    padding: 1.5rem;
+  }
+
+  .exercise-checkboxes {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons-container {
+    flex-direction: column;
+  }
+
+  .save-btn,
+  .cancel-btn {
+    width: 100%;
+  }
+}
