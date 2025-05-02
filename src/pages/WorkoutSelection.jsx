@@ -145,12 +145,17 @@ const WorkoutSelection = () => {
       // Store the selected plan inside the user's document
       const userRef = doc(firestore, "users", user.uid);
 
-      // Store workout plan and initialize an empty workout history if it doesn't exist
+      // Get the current user document
+      const userDoc = await getDoc(userRef);
+      const userData = userDoc.exists() ? userDoc.data() : {};
+
+      // Update only specific fields, keeping workout history intact
       await setDoc(userRef, {
-        workoutPlan: selectedPlan,
+        workoutPlan: selectedPlan,  // Complete replacement of the workout plan
         lastUpdated: new Date(),
-        workoutHistory: []
-      }, { merge: true });
+        // Initialize workout history if it doesn't exist
+        workoutHistory: userData.workoutHistory || []
+      });
 
       alert("Workout plan selected successfully!");
       navigate("/dashboard"); // Redirect to Dashboard after selection

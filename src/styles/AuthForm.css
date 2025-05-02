@@ -107,3 +107,10 @@
   50% { opacity: 1; }
   100% { opacity: 0.6; }
 }
+
+.auth-version {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  margin-top: 20px;
+}

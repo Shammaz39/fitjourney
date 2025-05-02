@@ -68,6 +68,8 @@ const AuthForm = ({ type }) => {
           {type === 'signUp' ? 'Log In' : 'Sign Up'}
         </button>
       </p>
+
+      <p className="auth-version">Version 1.0.2</p>
     </div>
   );
 };

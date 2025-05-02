@@ -1,3 +1,13 @@
+Version 1.0.2
+    New Features:
+        - Added Reset Workout functionality.
+        - Users can now choose any date to log their workout.
+        - Version details have been added to the end of the login and sign-up pages.
+    Bug Fixes:
+        - Resolved issues with selecting a workout plan.
+
+Note: All previous data has been reset, and users will need to start fresh from the beginning.
+------------------------------------------------------
 Version 1.0.1
     - Added DashBoard Functionality
 ------------------------------------------------------

@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { firestore } from "../firebase/firebase";
-import { doc, getDoc, updateDoc, arrayUnion, serverTimestamp } from "firebase/firestore";
+import { doc, getDoc, updateDoc, arrayUnion } from "firebase/firestore";
+// import { doc, getDoc, updateDoc, arrayUnion, serverTimestamp } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "../styles/LogWorkout.css";
 
 const LogWorkout = () => {
   const { user } = useContext(AuthContext);
+
   const [selectedWorkout, setSelectedWorkout] = useState(null);
   const [workoutLog, setWorkoutLog] = useState({});
   const [currentDate, setCurrentDate] = useState(new Date().toISOString().split('T')[0]);
@@ -16,10 +18,11 @@ const LogWorkout = () => {
   const [selectedExercises, setSelectedExercises] = useState([]);
   const navigate = useNavigate();
 
-  // Get the current day of the week
-  const getCurrentDayOfWeek = () => {
+  // Get the day of the week for a given date
+  const getDayOfWeek = (dateString) => {
+    const date = new Date(dateString);
     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    return days[new Date().getDay()];
+    return days[date.getDay()];
   };
 
   useEffect(() => {
@@ -36,14 +39,14 @@ const LogWorkout = () => {
           if (userData.workoutPlan) {
             setSelectedWorkout(userData.workoutPlan);
 
-            // Find today's exercises based on the current day
-            const currentDay = getCurrentDayOfWeek();
+            // Find exercises based on the selected date
+            const selectedDay = getDayOfWeek(currentDate);
             let exercises = [];
 
             // Look for the day in the workout plan
             // This handles both "Monday" and "Push (Monday)" formats
             Object.entries(userData.workoutPlan.days || {}).forEach(([day, dayExercises]) => {
-              if (day.includes(currentDay)) {
+              if (day.includes(selectedDay)) {
                 exercises = dayExercises;
               }
             });
@@ -68,7 +71,7 @@ const LogWorkout = () => {
     };
 
     fetchUserWorkout();
-  }, [user]);
+  }, [user, currentDate]); // Added currentDate as dependency
 
   const handleSetChange = (exercise, setIndex, field, value) => {
     setWorkoutLog(prev => {
@@ -166,7 +169,7 @@ const LogWorkout = () => {
 
       const workoutEntry = {
         date: currentDate,
-//         timestamp: serverTimestamp(),
+//         timestamp: serverTimestamp(), // Uncommented this line
         workout: selectedLog,
         notes: notes
       };
@@ -207,8 +210,8 @@ const LogWorkout = () => {
           {todaysExercises.length > 0 ? (
             <>
               <div className="exercise-selection">
-                <h4>Today's Exercises ({getCurrentDayOfWeek()})</h4>
-                <p className="selection-hint">Select exercises for today's workout:</p>
+                <h4>Exercises for {getDayOfWeek(currentDate)}</h4>
+                <p className="selection-hint">Select exercises for this workout:</p>
 
                 <div className="exercise-checkboxes">
                   {todaysExercises.map(exercise => (
@@ -286,7 +289,7 @@ const LogWorkout = () => {
             </>
           ) : (
             <div className="no-exercises-today">
-              <p>No exercises scheduled for today ({getCurrentDayOfWeek()}).</p>
+              <p>No exercises scheduled for {getDayOfWeek(currentDate)}.</p>
               <p>Would you like to do an alternative workout?</p>
               {selectedWorkout.exercises && selectedWorkout.exercises.length > 0 && (
                 <div className="alternative-exercises">
